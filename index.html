@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- === SEO & Meta Tags (Updated for Hotels & Restaurants) === -->
+    <title>رافات ستاي | دليلك للإقامات والمطاعم الأكثر فخامة</title>
+    <meta name="description" content="رافات ستاي: المنصة الرائدة لحجز أفخم الفنادق والمطاعم. تجول في أرقى الأماكن عبر تقنية 3D، احجز طاولتك أو غرفتك، واستمتع بمكافآت ولاء حصرية.">
+    <meta name="keywords" content="حجز فنادق، حجز مطاعم، إقامات فاخرة، تجارب عشاء، رافات ستاي، سياحة، فنادق راقية، مطاعم فخمة، RafatStay">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <style>
+        :root {
+            --primary-gold: #c19632;
+            --gold-gradient: linear-gradient(135deg, #c19632 0%, #e5c16d 50%, #c19632 100%);
+            --navy: #082133;
+            --white: #FAF5EB;
+            --glass-white: rgba(255, 255, 255, 0.03);
+            --border-gold: rgba(193, 150, 50, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--navy);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: var(--primary-gold); }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 15px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 33, 51, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+        }
+
+        /* --- Hero --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(8, 33, 51, 0.7), rgba(8, 33, 51, 0.7)), 
+                        url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070') center/cover;
+            padding: 0 5%;
+        }
+
+        .hero-content { z-index: 10; max-width: 900px; }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .gold-text { color: var(--primary-gold); }
+
+        .btn-gold {
+            background: var(--primary-gold);
+            color: var(--navy);
+            padding: 16px 45px;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: 0.3s;
+            margin-top: 30px;
+            border: 1px solid var(--primary-gold);
+        }
+
+        .btn-gold:hover {
+            background: transparent;
+            color: var(--primary-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(193, 150, 50, 0.4);
+        }
+
+        /* --- Stats Bar --- */
+        .stats-wrap {
+            background: rgba(255,255,255,0.02);
+            padding: 40px 10%;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .stat-card { text-align: center; }
+        .stat-card h4 { font-size: 2.2rem; color: var(--primary-gold); }
+
+        /* --- Sections --- */
+        .section { padding: 100px 10%; }
+
+        .section-tag {
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        /* --- Service Cards --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--glass-white);
+            border: 1px solid var(--border-gold);
+            padding: 50px 40px;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--primary-gold);
+            transform: scaleY(0);
+            transition: 0.4s;
+        }
+
+        .service-card:hover::before { transform: scaleY(1); }
+
+        .service-card:hover {
+            background: rgba(193, 150, 50, 0.05);
+            transform: translateX(-10px);
+        }
+
+        .icon-circle {
+            width: 70px; height: 70px;
+            border: 1px solid var(--primary-gold);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; margin-bottom: 30px;
+        }
+
+        /* --- Dual Path (Hotels & Restaurants) --- */
+        .dual-path {
+            display: flex;
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .path-box {
+            flex: 1;
+            padding: 60px;
+            border: 1px solid var(--border-gold);
+            background: linear-gradient(45deg, rgba(8,33,51,1), rgba(193, 150, 50, 0.1));
+            text-align: center;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #030d15;
+            padding: 60px 10%;
+            border-top: 1px solid var(--border-gold);
+            text-align: center;
+        }
+
+        .footer-logo { font-size: 2rem; font-weight: 900; color: var(--primary-gold); margin-bottom: 20px; }
+
+        /* Animation */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 1.2s ease forwards; }
+
+        @media (max-width: 768px) {
+            .dual-path { flex-direction: column; }
+            .section { padding: 60px 5%; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav>
+        <div class="logo">RAFATSTAY</div>
+        <div class="nav-links">
+            <a href="#stays" style="color: var(--white); text-decoration: none; margin-right: 20px;">الإقامات</a>
+            <a href="#dining" style="color: var(--white); text-decoration: none;">المطاعم</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <span class="section-tag">النخبة تختار الأفضل</span>
+            <h1 class="hero-title">وجـهتـك الفـاخـرة لـ <br> <span class="gold-text">الإقامة والـمـذاق</span></h1>
+            <p style="font-size: 1.4rem; opacity: 0.8; font-weight: 200;">مـن الفنـادق المصنـفة عالميـاً إلى المطاعـم الحاصـلة على نـجوم ميـشلان، كلـه فـي مكان واحـد.</p>
+            <a href="#services" class="btn-gold">اكتشف العـالم الآن</a>
+        </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="stats-wrap">
+        <div class="stat-card" data-aos="zoom-in">
+            <h4>120+</h4>
+            <p>فـندق فـاخر</p>
+        </div>
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+            <h4>250+</h4>
+            <p>مطـعم راقـي</p>
+        </div>
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+            <h4>45K+</h4>
+            <p>عـضو نـخبوي</p>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <span class="section-tag">خـدماتـنا</span>
+        <h2 class="section-title">تجـربة لا تُنـسى بكل المقـاييس</h2>
+
+        <div class="services-grid">
+            <!-- Stay Card -->
+            <article class="service-card" data-aos="fade-left" id="stays">
+                <div class="icon-circle">🛌</div>
+                <h3>إقـامات اسـتثنائية</h3>
+                <p>سواء كانت فيلا خاصة أو جناحاً ملكياً، نضمن لك تجربة سكنية تخطف الأنفاس بصور واقعية ومراجعات حقيقية.</p>
+            </article>
+
+            <!-- Dining Card -->
+            <article class="service-card" data-aos="fade-left" data-aos-delay="100" id="dining">
+                <div class="icon-circle">🍽️</div>
+                <h3>مـذاق النـخبة</h3>
+                <p>تصفح قوائم الطعام، احجز طاولتك المفضلة، واستمتع بتجارب تذوق فريدة من نوعها في أرقى المطاعم.</p>
+            </article>
+
+            <!-- 3D Card -->
+            <article class="service-card" data-aos="fade-left" data-aos-delay="200">
+                <div class="icon-circle">📹</div>
+                <h3>الـجولة الـثلاثية 3D</h3>
+                <p>كأنك هناك. شاهد كل تفصيل في الفندق أو المطعم قبل الحجز عبر تقنية الواقع الافتراضي المتطورة.</p>
+            </article>
+        </div>
+
+        <!-- Highlight Box -->
+        <div class="dual-path">
+            <div class="path-box" data-aos="fade-up">
+                <h3 class="gold-text" style="font-size: 1.8rem; margin-bottom: 15px;">احـجز إقـامـتـك</h3>
+                <p>خصومات حصرية على أرقى سلاسل الفنادق العالمية للأعضاء فقط.</p>
+            </div>
+            <div class="path-box" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="gold-text" style="font-size: 1.8rem; margin-bottom: 15px;">احـجز طـاولـتـك</h3>
+                <p>خدمة الـ Concierge الرقمية لتأمين حجزك في أكثر المطاعم طلباً.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">RAFATSTAY</div>
+        <p style="font-weight: 200; margin-bottom: 30px; opacity: 0.7;">أينما كنت، الـفخامة هي اخـتيارك الوحـيد.</p>
+        <div style="border-top: 1px solid var(--border-gold); padding-top: 30px; font-size: 0.8rem; opacity: 0.5;">
+            جميع الحقوق محفوظة © 2026 رافات ستاي | الحل الأمثل للضيافة الرفيعة
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-quart'
+        });
+    </script>
+</body>
+</html>
