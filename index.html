@@ -53,7 +53,7 @@
         nav {
             position: fixed;
             top: 0; width: 100%;
-            padding: 20px 8%;
+            padding: 15px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -69,49 +69,86 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            z-index: 2001;
         }
 
         .logo-img {
-            width: 45px;
-            height: 45px;
+            width: 35px;
+            height: 35px;
             object-fit: contain;
         }
 
         .logo-text {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 900;
             color: var(--primary-gold);
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             font-family: 'Outfit', sans-serif;
         }
 
         .nav-links {
             display: flex;
-            gap: 35px;
+            gap: 25px;
+            align-items: center;
         }
 
         .nav-links a {
             color: var(--white);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 500;
+            font-size: 0.95rem;
             transition: 0.3s;
             position: relative;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 2001;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 30px;
             height: 2px;
             background: var(--primary-gold);
             transition: 0.3s;
         }
 
-        .nav-links a:hover { color: var(--primary-gold); }
-        .nav-links a:hover::after { width: 100%; }
+        /* Mobile Nav Layout */
+        @media (max-width: 1024px) {
+            .hamburger { display: flex; }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--navy-dark);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.5s;
+                border-left: 1px solid var(--border-gold);
+                gap: 40px;
+                z-index: 2000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.4rem;
+            }
+
+            .nav-cta {
+                display: none; /* Hide button in mobile nav bar, put inside menu or keep simple */
+            }
+        }
 
         /* --- Hero Section --- */
         .hero {
@@ -437,17 +474,24 @@
         }
 
         @media (max-width: 1024px) {
-            .download-container, .highlight-3d, .footer-grid { grid-template-columns: 1fr; }
+            .download-container, .highlight-3d, .footer-grid { 
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
             .tiers-grid { grid-template-columns: repeat(2, 1fr); }
-            nav { padding: 15px 5%; }
-            .nav-links { display: none; }
+            .hero-title { font-size: 3.5rem; }
+            .image-stack { height: 350px; }
         }
 
         @media (max-width: 768px) {
-            .section-title { font-size: 2.5rem; }
-            .hero-title { font-size: 3rem; }
+            .section-title { font-size: 2.2rem; }
+            .hero-title { font-size: 2.8rem; }
             .tiers-grid { grid-template-columns: 1fr; }
+            .hero { padding-top: 100px; height: auto; padding-bottom: 80px; }
+            .download-card { padding: 40px 20px; }
+            .store-btn { min-width: 100%; }
         }
+
     </style>
 </head>
 <body>
@@ -465,10 +509,16 @@
             <a href="#download">حمل التطبيق</a>
             <a href="#business">للأعمال</a>
         </div>
-        <a href="#download" class="btn-gold" style="padding: 10px 25px; font-size: 0.9rem;">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <a href="#download" class="btn-gold nav-cta" style="padding: 10px 25px; font-size: 0.9rem;">
             ابدأ الآن
         </a>
     </nav>
+
 
     <!-- Hero -->
     <header class="hero">
@@ -692,6 +742,40 @@
             easing: 'ease-out-quart'
         });
 
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navA = document.querySelectorAll('.nav-links a');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('toggle');
+            
+            // Hamburger Animation
+            const spans = hamburger.querySelectorAll('span');
+            if(hamburger.classList.contains('toggle')) {
+                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Close menu when clicking a link
+        navA.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('toggle');
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
         // Navbar Scroll Effect
         window.onscroll = function() {
             var nav = document.querySelector('nav');
@@ -706,3 +790,4 @@
     </script>
 </body>
 </html>
+
