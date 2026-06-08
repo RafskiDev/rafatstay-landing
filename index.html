@@ -53,12 +53,38 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "RafatStay",
-      "url": "https://rafatstay.com",
-      "logo": "https://rafatstay.com/assets/img/icon.png",
-      "sameAs": [
-        "https://play.google.com/store/apps/details?id=com.rsk.rafatstay"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://rafatstay.com/#organization",
+          "name": "RafatStay | رافات ستاي",
+          "url": "https://rafatstay.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "@id": "https://rafatstay.com/#logo",
+            "url": "https://rafatstay.com/assets/img/icon.png",
+            "contentUrl": "https://rafatstay.com/assets/img/icon.png",
+            "width": 1024,
+            "height": 1024,
+            "caption": "RafatStay Logo"
+          },
+          "image": {
+            "@id": "https://rafatstay.com/#logo"
+          },
+          "sameAs": [
+            "https://play.google.com/store/apps/details?id=com.rsk.rafatstay"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://rafatstay.com/#website",
+          "url": "https://rafatstay.com/",
+          "name": "RafatStay | رافات ستاي",
+          "publisher": {
+            "@id": "https://rafatstay.com/#organization"
+          },
+          "description": "رافات ستاي - تجربة الفخامة والضيافة الراقية"
+        }
       ]
     }
     </script>
